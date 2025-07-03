@@ -51,8 +51,9 @@ def generate_marker(dictionary, marker_id, marker_size, output_path):
     if marker_size_m > A4_SIZE_m[0] or marker_size_m > A4_SIZE_m[1]:
         raise ValueError('given size exceeds A4')
 
-    aruco_dict = cv2.aruco.Dictionary_get(getattr(cv2.aruco, dictionary))
-    imboard = cv2.aruco.drawMarker(aruco_dict, marker_id, marker_size_pixels[0])
+    aruco_dict = cv2.aruco.getPredefinedDictionary(getattr(cv2.aruco, dictionary))
+    imboard = cv2.aruco.generateImageMarker(aruco_dict, marker_id, marker_size_pixels[0])
+
 
     f = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
 
